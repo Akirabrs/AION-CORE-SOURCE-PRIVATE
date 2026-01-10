@@ -1,51 +1,57 @@
-##
+# ⚛️ AION-CORE v18.3 "CENTURION"
+
+<p align="center">
+  <img src="https://img.shields.io/badge/Status-TRL%204%20(Sim%20Validated)-success?style=for-the-badge&logo=python" alt="Status">
+  <img src="https://img.shields.io/badge/Latency-%3C%20100ns%20(Deterministic)-blue?style=for-the-badge&logo=speedtest" alt="Latency">
+  <img src="https://img.shields.io/badge/Architecture-Distributed%20Spider--Sense-blueviolet?style=for-the-badge&logo=arduino" alt="Architecture">
+  <img src="https://img.shields.io/badge/Platform-FPGA%20%2F%20Verilog%20HDL-red?style=for-the-badge&logo=xilinx" alt="Platform">
+</p>
+
+## 📑 Resumo Executivo
+O **AION-CORE v18.3** é um kernel de controle antecipatório ultra-rápido projetado para a estabilização de plasmas de alta-$\beta$ em tokamaks, com foco específico em **Eventos de Deslocamento Vertical (VDEs)**. Esta versão consolida a transição para a arquitetura de **Reflexo Distribuído**, onde a inteligência é dividida entre um orquestrador global e medulas locais (Smart Coils) com autonomia de pânico.
+
+---
+
+## 🏗️ Arquitetura do Sistema: Distributed Spider-Sense
+O sistema opera em duas trilhas paralelas para vencer a latência mecânica das bobinas e o jitter de processamento externo.
+
+```mermaid
 graph TD
-    subgraph Plant ["⚛️ Physical Plant (Tokamak)"]
-        S["⚡ Magnetic Sensors (dB/dt)"]
-        A["🔌 Smart Coils (Actuators)"]
+    subgraph Plant ["⚛️ Planta Física (Tokamak)"]
+        S["⚡ Sensores Magnéticos (dB/dt)"]
+        A["🔌 Smart Coils (Atuadores)"]
     end
 
-    subgraph AION_GLOBAL ["🧠 Global Cognitive Layer (External CPU/FPGA)"]
-        direction TB
-        L3["🌐 Multi-Coil Orchestrator"]
-        L2["🔄 RLS Parameter Adaptation"]
-        NPE_G["📉 Global NPE Model"]
-        
-        L3 --> NPE_G
-        L2 --> L3
+    subgraph AION_GLOBAL ["🧠 Camada Cognitiva (Orquestrador Central)"]
+        L3["🌐 Orquestrador Multi-Bobinas"]
+        L2["🔄 Adaptação de Parâmetros RLS"]
+        L3 --> L2
     end
 
-    subgraph SMART_COIL ["🛡️ Local Reflex Layer (FPGA - Smart Coil)"]
+    subgraph SMART_COIL ["🛡️ Camada de Reflexo (FPGA Smart Coil)"]
         direction TB
-        
         subgraph Action_Path ["Linha de Atuação (Instinto)"]
-            POD["🎯 PI-POD (Sensor Fusion)"]
-            LQR["⚡ Local LQR / Reflex"]
+            POD["🎯 PI-POD Fusion"]
+            LQR["⚡ LQR Linear Local"]
         end
 
         subgraph Guardian_Path ["Linha de Julgamento (Spider-Sense)"]
-            MEM["🧠 Clock Memory"]
-            PSQ["⚖️ Parallel PSQ Auditor"]
-            GUARD["🛡️ Guardian Logic (AEGIS)"]
+            MEM["🧠 Memória de Clock"]
+            PSQ["⚖️ Auditor PSQ Paralelo"]
+            GUARD["🛡️ Lógica AEGIS"]
         end
 
-        POD ===>|Clean Z/V| LQR
-        MEM -.->|Prediction| PSQ
-        POD ===>|Real-time Z| PSQ
-        PSQ ===>|Divergence Check| GUARD
+        POD ===>|Z/V Data| LQR
+        POD ===>|Real-time| PSQ
+        MEM -.->|Predição Física| PSQ
+        PSQ ===>|Divergência| GUARD
     end
 
-    %% Conexões de Sistema
     S ===>|High-Speed Link| POD
-    L3 -.->|i_ref Suggestion| LQR
-    GUARD -- "OVERRIDE (Panic)" --> A
-    LQR -- "Nominal Pulse" --> A
-    
-    %% Twin-Bus Feedback
-    PSQ -.->|Fault/Status| L3
+    L3 -.->|Sugestão de i_ref| LQR
+    GUARD -- "OVERRIDE (Soco)" --> A
+    LQR -- "Pulso Nominal" --> A
 
-    %% Styling
     style GUARD fill:#ff3333,stroke:#333,stroke-width:2px,color:white
-    style POD fill:#add8e6,stroke:#333,color:black
-    style L3 fill:#99ccff,stroke:#333,color:black
     style PSQ fill:#f96,stroke:#333,stroke-width:2px,color:black
+    style POD fill:#add8e6,stroke:#333,color:black
