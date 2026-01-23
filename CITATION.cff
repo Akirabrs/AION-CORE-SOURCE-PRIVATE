@@ -1,0 +1,12 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: "Brasil de Souza"
+    given-names: "Guilherme"
+    email: "Guilhermebrs.kira@gmail.com"
+    affiliation: "Guibral-Labs Research"
+title: "AION-CORE v19.2: Robust Vertical Stability Control in Spherical Tokamaks"
+version: 19.2
+date-released: 2026-01-22
+url: "https://github.com/Akirabrs/AION-CORE"
+license: MIT

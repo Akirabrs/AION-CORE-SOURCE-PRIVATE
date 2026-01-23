@@ -1,4 +1,4 @@
-# AION-CORE v19.2: Deterministic VDE Control Kernel
+# AION-CORE vV19.2: Deterministic VDE Control Kernel
 
 <p align="center">
   <img src="https://img.shields.io/badge/Status-Research--Ready-success?style=for-the-badge" alt="Status">
@@ -6,9 +6,9 @@
 </p>
 
 ## ⚛️ Overview
-**AION-CORE v19.2** is a deterministic control kernel designed for sub-microsecond suppression of Vertical Displacement Events (VDE) in spherical tokamaks.
+**AION-CORE vV19.2** is a deterministic control kernel designed for sub-microsecond suppression of Vertical Displacement Events (VDE) in spherical tokamaks.
 
-## 🏗️ Architecture
+## ⎈️ Architecture
 
 ```mermaid
 graph TD
@@ -27,11 +27,11 @@ graph TD
 
 ```
 
-## 📂 Repository Structure
+## 📁 Repository Structure
 
 * `src/kernel/`: Core Python/HDL implementation.
 * `docs/academic/`: Technical papers and LaTeX source files.
 
 ---
 
-**Guilherme Brasil de Souza** | *v19.2 Release*
+**Guilherme Brasil de Souza** | *vV19.2 Release*
